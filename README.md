@@ -19,12 +19,6 @@ Tool-agnostic skills for coding agents.
 Each skill lives in its own directory and uses a `SKILL.md` file with standard
 frontmatter. Copy or reference the `skills/` directory from your agent tool.
 
-## Source of truth
-
-This repository is the source of truth for the included skills. Add or update
-skills under `skills/`, then commit and push the changes. Agent-specific skill
-directories are runtime installations or copies and are not canonical.
-
 ## External skills
 
 These skills are not hosted here. Install them from their upstream projects:
