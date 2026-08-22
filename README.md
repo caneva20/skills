@@ -8,6 +8,10 @@ Tool-agnostic skills for coding agents.
 - `concise-writing`: Write direct, standalone prose.
 - `full-superpowers`: Apply the strict Superpowers workflow only when explicitly requested.
 - `systematic-debugging`: Find evidence for a root cause before changing code.
+- `todo`: Draft and create GitHub backlog issues with project priority.
+- `todo-migrate`: Move a legacy TODO.md backlog into GitHub Issues.
+- `todo-setup`: Configure the GitHub todo workflow for a repository.
+- `todos`: List, review, and complete GitHub todo issues.
 - `unslop`: Remove predictable AI writing patterns while preserving meaning and voice.
 - `verification-before-completion`: Verify completion claims with fresh evidence.
 - `work-intake`: Check requirements against the current repository before non-trivial work.
