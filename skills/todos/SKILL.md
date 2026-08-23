@@ -1,11 +1,21 @@
 ---
 name: todos
-description: Use when the user asks what todos exist, wants a backlog issue summarized or reviewed, or asks to complete tracked work in GitHub Issues.
+description: Use when the user asks what todos exist, wants a backlog issue started, summarized, reviewed, or completed in GitHub Issues.
 ---
 
 # Todos
 
-GitHub Issues with the configured todo label are the backlog. Run `$todo-setup` when `.agents/todo.json` is missing, incomplete, or has `setupComplete: false`. The project supplies priority metadata.
+GitHub Issues with the configured todo label are the backlog. Run `$todo-setup` when `.agents/todo.json` is missing, incomplete, or has `setupComplete: false`. The project supplies priority metadata. Status transitions and issue closure are best effort. Ask when the target issue is ambiguous, and report failed operations without claiming they succeeded.
+
+## Read-only GitHub delegation
+
+Dispatch `github-todo-worker` for every read-only `gh` command below. Batch the
+known queries needed before each parent decision point into one task. Give the
+worker the configured repository, selected project, and exact data needed.
+
+The parent agent reads configuration, asks questions, resolves target issues,
+checks completion evidence, and runs every write command. Dispatch the worker
+again for post-write verification reads.
 
 ## Preflight
 
@@ -35,13 +45,21 @@ Include closed issues only when the user asks for history or completed work.
 5. Match its URL to the selected project's item list and read priority from that project item. If it is absent, say that it is not in the selected project instead of inferring priority from labels.
 6. Summarize its objective, project priority, state, and relevant discussion without inventing progress.
 
+## Start a todo
+
+1. Identify one open todo issue confidently. If more than one issue matches, show the candidates and ask the user to choose.
+2. Match its URL to the selected project's item list and read the current `Status` field and options. Do not assume the project item or status option from the issue alone.
+3. If the item is not already `In progress`, best-effort set it with `gh project item-edit <number> --owner <owner> --url <issue-url> --field "Status" --value "In progress"`.
+4. If the project item, status field, or target status is unavailable, report the failure and continue only if the work can proceed safely. Never silently update a different issue.
+
 ## Complete a todo
 
-1. Identify one open todo issue confidently.
+1. Identify one open todo issue confidently. If more than one issue matches, show the candidates and ask the user to choose.
 2. Confirm implementation evidence from the current work or ask the user for it. Intent alone is not evidence.
 3. Post a concise evidence comment with `gh issue comment <number> --body "<completion evidence>"`.
-4. Close it with `gh issue close <number> --reason completed`.
-5. Re-read the issue and report its number, title, closed state, and URL.
+4. Attempt to close it with `gh issue close <number> --reason completed`.
+5. Best-effort set the matching project item's `Status` to `Done` with `gh project item-edit <number> --owner <owner> --url <issue-url> --field "Status" --value "Done"` if closing the issue did not update it automatically.
+6. Re-read the issue and project item, then report its number, title, closed state, project status, and URL. Report any close or status-update failure instead of treating it as successful.
 
 Keep labels when closing an issue. They preserve backlog history.
 

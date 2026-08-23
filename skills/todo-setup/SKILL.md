@@ -7,6 +7,15 @@ description: Use on first todo workflow use, or when the todo configuration is m
 
 Configure the repository's GitHub todo workflow in `.agents/todo.json`. This skill alone may create missing todo labels, with user approval.
 
+## Read-only GitHub delegation
+
+Dispatch `github-todo-worker` for every read-only `gh` command below. Batch the
+known queries needed before each parent question into one task. Give the worker
+the configured repository, selected project, and exact data needed.
+
+The parent agent asks every configuration question, changes labels only after
+approval, and writes `.agents/todo.json`.
+
 ## When setup runs
 
 Run setup before any todo workflow when `.agents/todo.json` is missing, incomplete, or has `setupComplete: false`. Users can also invoke `$todo-setup` to review or change the configuration.
