@@ -19,7 +19,9 @@ Use this skill when work has acceptance criteria, changes behavior, spans respon
 4. Check whether related documentation, tests, code, and the user's request disagree. Do not silently choose one source.
 5. If a material uncertainty remains, give the user the context needed to decide, then ask one focused question. Load and apply `interview-me` when the underlying intent, success condition, scope, or tradeoff is unclear.
 6. Challenge the user's premise only when code, requirements, risks, or tradeoffs provide evidence. State that evidence directly.
-7. Once the criteria are current and the task is clear, proceed without adding an approval gate.
+7. Once the criteria are current, run `work-decomposition` before planning or
+   implementation. If it finds a reusable part, follow its proposal and
+   confirmation gate. If it finds no useful split, proceed with the task.
 
 Keep the intake proportional to the work. Do not search unrelated parts of the repository or turn a clear task into a requirements exercise.
 

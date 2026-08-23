@@ -14,6 +14,7 @@ Tool-agnostic skills for coding agents.
 - `todos`: List, review, and complete GitHub todo issues.
 - `unslop`: Remove predictable AI writing patterns while preserving meaning and voice.
 - `verification-before-completion`: Verify completion claims with fresh evidence.
+- `work-decomposition`: Find reusable capabilities and split non-trivial work into focused items.
 - `work-intake`: Check requirements against the current repository before non-trivial work.
 
 Each skill lives in its own directory and uses a `SKILL.md` file with standard
