@@ -17,7 +17,7 @@ Use this skill when work has acceptance criteria, changes behavior, spans respon
 2. Inspect the current code involved. Treat the repository as authoritative for what previous work has already changed.
 3. Revalidate each acceptance criterion against the current code. Identify criteria that are already satisfied, stale, contradictory, ambiguous, or based on an incorrect premise.
 4. Check whether related documentation, tests, code, and the user's request disagree. Do not silently choose one source.
-5. If a material uncertainty remains, give the user the context needed to decide, then ask one focused question. Load and apply `interview-me` when the underlying intent, success condition, scope, or tradeoff is unclear.
+5. If a material uncertainty remains, give the user the context needed to decide, then ask one focused question. Load and apply `interview-me` (or ask one focused question if it is unavailable) when the underlying intent, success condition, scope, or tradeoff is unclear.
 6. Challenge the user's premise only when code, requirements, risks, or tradeoffs provide evidence. State that evidence directly.
 7. Once the criteria are current, run `work-decomposition` before planning or
    implementation. If it finds a reusable part, follow its proposal and

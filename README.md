@@ -20,6 +20,16 @@ Tool-agnostic skills for coding agents.
 Each skill lives in its own directory and uses a `SKILL.md` file with standard
 frontmatter. Copy or reference the `skills/` directory from your agent tool.
 
+For Claude Code, symlink each skill into `~/.claude/skills/` (or a project's
+`.claude/skills/`), which it reads instead of `~/.agents/skills`:
+
+```sh
+for d in /path/to/skills/skills/*/; do ln -s "${d%/}" ~/.claude/skills/; done
+```
+
+The `todo*` skills delegate read-only `gh` queries to a `github-todo-worker`
+agent when the tool provides one; otherwise they run the queries directly.
+
 ## External skills
 
 These skills are not hosted here. Install them from their upstream projects:

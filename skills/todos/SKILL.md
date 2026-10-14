@@ -5,11 +5,12 @@ description: Use when the user asks what todos exist, wants a backlog issue star
 
 # Todos
 
-GitHub Issues with the configured todo label are the backlog. Run `$todo-setup` when `.agents/todo.json` is missing, incomplete, or has `setupComplete: false`. The project supplies priority metadata. Status transitions and issue closure are best effort. Ask when the target issue is ambiguous, and report failed operations without claiming they succeeded.
+GitHub Issues with the configured todo label are the backlog. Run the `todo-setup` skill when `.agents/todo.json` is missing, incomplete, or has `setupComplete: false`. The project supplies priority metadata. Status transitions and issue closure are best effort. Ask when the target issue is ambiguous, and report failed operations without claiming they succeeded.
 
 ## Read-only GitHub delegation
 
-Dispatch `github-todo-worker` for every read-only `gh` command below. Batch the
+Dispatch `github-todo-worker`, when the agent tool provides it, for every
+read-only `gh` command below; otherwise run them directly. Batch the
 known queries needed before each parent decision point into one task. Give the
 worker the configured repository, selected project, and exact data needed.
 

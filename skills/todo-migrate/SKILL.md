@@ -5,11 +5,12 @@ description: Use when a file-backed TODO.md backlog must be migrated into GitHub
 
 # Todo migrate
 
-Move a legacy backlog into GitHub Issues while preserving its state and provenance. Run `$todo-setup` when `.agents/todo.json` is missing, incomplete, or has `setupComplete: false`. If the source file does not exist, report that there is nothing to migrate.
+Move a legacy backlog into GitHub Issues while preserving its state and provenance. Run the `todo-setup` skill when `.agents/todo.json` is missing, incomplete, or has `setupComplete: false`. If the source file does not exist, report that there is nothing to migrate.
 
 ## Read-only GitHub delegation
 
-Dispatch `github-todo-worker` for every read-only `gh` command below. Batch the
+Dispatch `github-todo-worker`, when the agent tool provides it, for every
+read-only `gh` command below; otherwise run them directly. Batch the
 known queries needed before each parent decision point into one task. Give the
 worker the configured repository, selected project, source path, and exact data
 needed. The worker may read the source to inventory entries and match markers.

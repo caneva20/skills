@@ -5,11 +5,12 @@ description: Use when the user asks to add a todo, capture follow-up work, note 
 
 # Todo
 
-Draft every requested todo before creating it. GitHub Issues with the configured todo label are the backlog. Run `$todo-setup` when `.agents/todo.json` is missing, incomplete, or has `setupComplete: false`.
+Draft every requested todo before creating it. GitHub Issues with the configured todo label are the backlog. Run the `todo-setup` skill when `.agents/todo.json` is missing, incomplete, or has `setupComplete: false`.
 
 ## Read-only GitHub delegation
 
-Dispatch `github-todo-worker` for every read-only `gh` command below. Batch the
+Dispatch `github-todo-worker`, when the agent tool provides it, for every
+read-only `gh` command below; otherwise run them directly. Batch the
 known queries needed before each parent decision point into one task. Give the
 worker the configured repository, selected project, and exact data needed.
 
